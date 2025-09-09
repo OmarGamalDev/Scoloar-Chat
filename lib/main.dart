@@ -16,7 +16,6 @@ class ScoloarChat extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: true,
         onGenerateRoute: onGenerateRoute,
