@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_colors.dart';
 
 class AppStyles {
-  static final TextStyle headline1 = TextStyle(
+  static final TextStyle logocolor = TextStyle(
     color: AppColors.whiteColor,
     fontSize: 28.sp,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.bold,
   );
-  static final TextStyle headline2 = TextStyle(
+  static final TextStyle headline1 = TextStyle(
     color: AppColors.whiteColor,
     fontSize: 24.sp,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
   );
   static final TextStyle bodytext = TextStyle(
     color: AppColors.whiteColor,
