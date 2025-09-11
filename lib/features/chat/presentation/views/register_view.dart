@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
-  static const String routeName = 'register';
+   static const String routeName = 'register';
 
   @override
   Widget build(BuildContext context) {

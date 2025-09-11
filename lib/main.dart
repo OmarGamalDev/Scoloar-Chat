@@ -11,6 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  runApp(const ScoloarChat());
 }
 
 class ScoloarChat extends StatelessWidget {
@@ -25,7 +26,13 @@ class ScoloarChat extends StatelessWidget {
         debugShowCheckedModeBanner: true,
         onGenerateRoute: onGenerateRoute,
         initialRoute: SignInView.routeName,
-        theme: ThemeData(textTheme: GoogleFonts.pacificoTextTheme()),
+        theme: ThemeData(textTheme: GoogleFonts.pacificoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+        primaryTextTheme: GoogleFonts.pacificoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+        ),
       ),
     );
   }

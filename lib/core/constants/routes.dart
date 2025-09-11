@@ -1,5 +1,5 @@
 
-import 'package:chat_app/features/chat/presentation/material_page_route_not_found.dart';
+import 'package:chat_app/features/chat/presentation/views/material_page_route_not_found.dart';
 import 'package:chat_app/features/chat/presentation/views/register_view.dart';
 import 'package:chat_app/features/chat/presentation/views/sign_in_view.dart';
 import 'package:flutter/material.dart';
