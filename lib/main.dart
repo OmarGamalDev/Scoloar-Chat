@@ -1,11 +1,16 @@
 import 'package:chat_app/core/constants/routes.dart';
 import 'package:chat_app/features/chat/presentation/views/sign_in_view.dart';
+import 'package:chat_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const ScoloarChat());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class ScoloarChat extends StatelessWidget {
