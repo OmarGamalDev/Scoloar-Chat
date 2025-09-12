@@ -1,16 +1,15 @@
 import 'dart:developer';
-
 import 'package:chat_app/core/constants/app_styles.dart';
 import 'package:chat_app/core/constants/asset_images.dart';
+import 'package:chat_app/core/shared_widgets/show_error_message.dart';
 import 'package:chat_app/core/constants/validator.dart';
 import 'package:chat_app/core/shared_widgets/custom_button.dart';
 import 'package:chat_app/core/shared_widgets/custom_text_form_field.dart';
+import 'package:chat_app/core/shared_widgets/show_success_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class RegisterViewBody extends StatefulWidget {
   RegisterViewBody({super.key});
@@ -68,6 +67,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   text: "Sign up",
                   onTap: () async {
                     if (!formKey.currentState!.validate()) {
+                      return;
+                    }
                       isLoading = true;
                       setState(() {});
                       try {
@@ -77,8 +78,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                           context,
                           message: "User Created Successfully",
                         );
-                        isLoading = false;
-                        setState(() {});
                       } on FirebaseAuthException catch (e) {
                         if (!context.mounted) return;
                         if (e.code == 'weak-password') {
@@ -98,9 +97,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                             message: e.message.toString(),
                           );
                         }
+                      } finally {
+                        isLoading = false;
+                        setState(() {});
+                        }
                       }
-                    }
-                  },
                 ),
               ),
               Padding(
@@ -131,20 +132,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
           ),
         ),
       ),
-    );
-  }
-
-  void showerrormessage(BuildContext context, {required String message}) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.error(message: message),
-    );
-  }
-
-  void showsuccessmessage(BuildContext context, {required String message}) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.success(message: message),
     );
   }
 
