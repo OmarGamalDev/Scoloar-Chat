@@ -8,9 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const ScoloarChat());
 }
 
@@ -23,15 +21,14 @@ class ScoloarChat extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: true,
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: onGenerateRoute,
         initialRoute: SignInView.routeName,
-        theme: ThemeData(textTheme: GoogleFonts.pacificoTextTheme(
-          Theme.of(context).textTheme,
-        ),
-        primaryTextTheme: GoogleFonts.pacificoTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        theme: ThemeData(
+          textTheme: GoogleFonts.pacificoTextTheme(Theme.of(context).textTheme),
+          primaryTextTheme: GoogleFonts.pacificoTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
       ),
     );

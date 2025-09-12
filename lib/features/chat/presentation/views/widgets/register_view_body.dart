@@ -6,6 +6,7 @@ import 'package:chat_app/core/constants/validator.dart';
 import 'package:chat_app/core/shared_widgets/custom_button.dart';
 import 'package:chat_app/core/shared_widgets/custom_text_form_field.dart';
 import 'package:chat_app/core/shared_widgets/show_success_message.dart';
+import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,39 +70,43 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     if (!formKey.currentState!.validate()) {
                       return;
                     }
-                      isLoading = true;
-                      setState(() {});
-                      try {
-                        await createuser();
-                        if (!context.mounted) return;
-                        showsuccessmessage(
+                    isLoading = true;
+                    setState(() {});
+                    try {
+                      await createuser();
+                      if (!context.mounted) return;
+                      showsuccessmessage(
+                        context,
+                        message: "User Created Successfully",
+                      );
+                      await Future.delayed(const Duration(milliseconds: 400));
+                      Navigator.pushReplacementNamed(
+                        context,
+                        ChatView.routeName,
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      if (!context.mounted) return;
+                      if (e.code == 'weak-password') {
+                        showerrormessage(
                           context,
-                          message: "User Created Successfully",
+                          message: 'The password provided is too weak.',
                         );
-                      } on FirebaseAuthException catch (e) {
-                        if (!context.mounted) return;
-                        if (e.code == 'weak-password') {
-                          showerrormessage(
-                            context,
-                            message: 'The password provided is too weak.',
-                          );
-                        } else if (e.code == 'email-already-in-use') {
-                          showerrormessage(
-                            context,
-                            message:
-                                'The account already exists for that email.',
-                          );
-                        } else {
-                          showerrormessage(
-                            context,
-                            message: e.message.toString(),
-                          );
-                        }
-                      } finally {
-                        isLoading = false;
-                        setState(() {});
-                        }
+                      } else if (e.code == 'email-already-in-use') {
+                        showerrormessage(
+                          context,
+                          message: 'The account already exists for that email.',
+                        );
+                      } else {
+                        showerrormessage(
+                          context,
+                          message: e.message.toString(),
+                        );
                       }
+                    } finally {
+                      isLoading = false;
+                      setState(() {});
+                    }
+                  },
                 ),
               ),
               Padding(

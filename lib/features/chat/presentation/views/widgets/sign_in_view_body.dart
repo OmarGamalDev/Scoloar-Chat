@@ -5,6 +5,7 @@ import 'package:chat_app/core/shared_widgets/custom_button.dart';
 import 'package:chat_app/core/shared_widgets/custom_text_form_field.dart';
 import 'package:chat_app/core/shared_widgets/show_error_message.dart';
 import 'package:chat_app/core/shared_widgets/show_success_message.dart';
+import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
 import 'package:chat_app/features/chat/presentation/views/register_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -71,16 +72,13 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                     isLoading = true;
                     setState(() {});
                     try {
-                      final credential = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                            email: email!,
-                            password: password!,
-                          );
+                      await signin();
                       if (!context.mounted) return;
                       showsuccessmessage(
                         context,
                         message: "Sign in successful",
                       );
+                      Navigator.pushReplacementNamed(context, ChatView.routeName);
                     } on FirebaseAuthException catch (e) {
                       if (!context.mounted) return;
                       if (e.code == 'user-not-found') {
@@ -135,6 +133,13 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> signin() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email!,
+      password: password!,
     );
   }
 }
