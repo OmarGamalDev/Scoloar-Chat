@@ -7,8 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatView extends StatelessWidget {
-  const ChatView({super.key});
+  const ChatView({super.key, required this.email});
   static const String routeName = 'ChatView';
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,9 @@ class ChatView extends StatelessWidget {
           ),
           leading: const SizedBox(),
         ),
-        body: ChatViewBody(),
+        body: ChatViewBody(
+          email: email,
+        ),
       ),
     );
   }

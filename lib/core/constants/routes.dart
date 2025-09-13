@@ -1,4 +1,3 @@
-
 import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
 import 'package:chat_app/features/chat/presentation/views/material_page_route_not_found.dart';
 import 'package:chat_app/features/chat/presentation/views/register_view.dart';
@@ -12,7 +11,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case RegisterView.routeName:
       return MaterialPageRoute(builder: (_) => const RegisterView());
     case ChatView.routeName:
-      return MaterialPageRoute(builder: (_) => const ChatView());
+      final args = settings.arguments;
+      return MaterialPageRoute(
+        builder: (_) =>
+            ChatView(email: args != null ? args as String : "Unknown"),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => const MaterialPageRouteNotFound(),

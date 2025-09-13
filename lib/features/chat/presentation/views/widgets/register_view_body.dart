@@ -1,10 +1,11 @@
 import 'dart:developer';
+
 import 'package:chat_app/core/constants/app_styles.dart';
 import 'package:chat_app/core/constants/asset_images.dart';
-import 'package:chat_app/core/shared_widgets/show_error_message.dart';
 import 'package:chat_app/core/constants/validator.dart';
 import 'package:chat_app/core/shared_widgets/custom_button.dart';
 import 'package:chat_app/core/shared_widgets/custom_text_form_field.dart';
+import 'package:chat_app/core/shared_widgets/show_error_message.dart';
 import 'package:chat_app/core/shared_widgets/show_success_message.dart';
 import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,6 +28,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool isLoading = false;
+  bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,18 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               CustomTextFormField(
                 Validator: Validator.validatePassword,
                 hintText: "Password",
+                obscureText: !isPasswordVisible,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isPasswordVisible = !isPasswordVisible;
+                    });
+                  },
+                ),
                 onChanged: (data) {
                   password = data;
                 },
@@ -79,10 +93,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         context,
                         message: "User Created Successfully",
                       );
-                      await Future.delayed(const Duration(milliseconds: 400));
                       Navigator.pushReplacementNamed(
                         context,
                         ChatView.routeName,
+                        arguments: email,
                       );
                     } on FirebaseAuthException catch (e) {
                       if (!context.mounted) return;

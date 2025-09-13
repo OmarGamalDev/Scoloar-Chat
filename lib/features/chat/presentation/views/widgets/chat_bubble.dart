@@ -1,10 +1,10 @@
+import 'package:chat_app/core/constants/app_colors.dart';
 import 'package:chat_app/core/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatBubble extends StatelessWidget {
-  const ChatBubble({super.key, required this.color, required this.text});
-  final Color color;
+  const ChatBubble({super.key, required this.text});
   final String text;
 
   @override
@@ -20,9 +20,45 @@ class ChatBubble extends StatelessWidget {
         ),
         margin: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
-          color: color,
+          color: AppColors.primaryColor,
           borderRadius: const BorderRadius.only(
             bottomRight: Radius.circular(30),
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Text(
+          text,
+          style: AppStyles.bodytext.copyWith(
+            fontFamily: "Roboto",
+            fontSize: 16.sp,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ChatBubbleToFriend extends StatelessWidget {
+  const ChatBubbleToFriend({super.key, required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        padding: EdgeInsets.only(
+          left: 20.w,
+          top: 16.h,
+          bottom: 16.h,
+          right: 20.w,
+        ),
+        margin: EdgeInsets.all(8.w),
+        decoration: BoxDecoration(
+          color: const Color(0xff006D84),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(30),
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
           ),

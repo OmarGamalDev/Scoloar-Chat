@@ -27,6 +27,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool isLoading = false;
+  bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +62,18 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                 onChanged: (data) {
                   password = data;
                 },
+                obscureText: !isPasswordVisible,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isPasswordVisible = !isPasswordVisible;
+                    });
+                  },
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 10.h),
@@ -78,7 +91,11 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                         context,
                         message: "Sign in successful",
                       );
-                      Navigator.pushReplacementNamed(context, ChatView.routeName);
+                      Navigator.pushReplacementNamed(
+                        context,
+                        ChatView.routeName,
+                        arguments: email,
+                      );
                     } on FirebaseAuthException catch (e) {
                       if (!context.mounted) return;
                       if (e.code == 'user-not-found') {
