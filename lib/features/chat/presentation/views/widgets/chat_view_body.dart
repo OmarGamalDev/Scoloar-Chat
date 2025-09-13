@@ -4,6 +4,7 @@ import 'package:chat_app/features/chat/presentation/views/widgets/chat_bubble.da
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChatViewBody extends StatelessWidget {
   ChatViewBody({super.key, required this.email});
@@ -68,9 +69,16 @@ class ChatViewBody extends StatelessWidget {
                       curve: Curves.easeIn,
                     );
                   },
+                  style: GoogleFonts.roboto(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
                   decoration: InputDecoration(
                     hintText: 'Type your message...',
-                    hintStyle: TextStyle(fontSize: 14.sp, fontFamily: "Roboto"),
+                    hintStyle: GoogleFonts.roboto(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.r),
                       borderSide: const BorderSide(
