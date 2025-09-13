@@ -29,7 +29,9 @@ class ChatViewBody extends StatelessWidget {
           List<MessageModel> messagesList = [];
           for (int i = 0; i < asyncSnapshot.data!.docs.length; i++) {
             messagesList.add(
-              MessageModel.fromJson(asyncSnapshot.data!.docs[i].data() as Map<String, dynamic>),
+              MessageModel.fromJson(
+                asyncSnapshot.data!.docs[i].data() as Map<String, dynamic>,
+              ),
             );
           }
           return Column(
@@ -79,8 +81,24 @@ class ChatViewBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.r),
                       borderSide: const BorderSide(color: Colors.black),
                     ),
-                    suffixIcon: Icon(Icons.send, color: AppColors.primaryColor),
-                    // Handle send button press
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.send, color: AppColors.primaryColor),
+                      onPressed: () {
+                        if (messageController.text.isNotEmpty) {
+                          messages.add({
+                            "message": messageController.text,
+                            "time": DateTime.now(),
+                            "id": email,
+                          });
+                          messageController.clear();
+                          scrollController.animateTo(
+                            0,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_app/core/constants/app_colors.dart';
 import 'package:chat_app/core/constants/app_styles.dart';
 import 'package:chat_app/core/constants/asset_images.dart';
@@ -14,7 +12,6 @@ class ChatView extends StatelessWidget {
   final String email;
   @override
   Widget build(BuildContext context) {
-   log("ChatView initialized with email: $email");
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {

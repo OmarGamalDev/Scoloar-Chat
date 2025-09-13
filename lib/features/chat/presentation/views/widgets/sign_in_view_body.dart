@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_app/core/constants/app_styles.dart';
 import 'package:chat_app/core/constants/asset_images.dart';
 import 'package:chat_app/core/constants/validator.dart';
@@ -98,7 +96,6 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                         ChatView.routeName,
                         arguments: email,
                       );
-                      log(email!);
                     } on FirebaseAuthException catch (e) {
                       if (!context.mounted) return;
                       if (e.code == 'user-not-found') {
