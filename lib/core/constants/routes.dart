@@ -11,10 +11,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case RegisterView.routeName:
       return MaterialPageRoute(builder: (_) => const RegisterView());
     case ChatView.routeName:
-      final args = settings.arguments;
       return MaterialPageRoute(
-        builder: (_) =>
-            ChatView(email: args != null ? args as String : "Unknown"),
+        builder: (_) =>ChatView(email: settings.arguments as String)
       );
     default:
       return MaterialPageRoute(

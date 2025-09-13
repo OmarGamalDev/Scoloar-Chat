@@ -8,8 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ChatViewBody extends StatelessWidget {
   ChatViewBody({super.key, required this.email});
 
-  final String email;
-
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference messages = FirebaseFirestore.instance.collection(
     'messages',
@@ -17,10 +15,10 @@ class ChatViewBody extends StatelessWidget {
   ScrollController scrollController = ScrollController();
 
   final TextEditingController messageController = TextEditingController();
+  final String email;
 
   @override
   Widget build(BuildContext context) {
-    final email = ModalRoute.of(context)!.settings.arguments as String?;
     return StreamBuilder<QuerySnapshot>(
       stream: messages.orderBy('time', descending: true).snapshots(),
       builder: (context, asyncSnapshot) {
@@ -31,7 +29,7 @@ class ChatViewBody extends StatelessWidget {
           List<MessageModel> messagesList = [];
           for (int i = 0; i < asyncSnapshot.data!.docs.length; i++) {
             messagesList.add(
-              MessageModel.fromJson(asyncSnapshot.data!.docs[i]),
+              MessageModel.fromJson(asyncSnapshot.data!.docs[i].data() as Map<String, dynamic>),
             );
           }
           return Column(

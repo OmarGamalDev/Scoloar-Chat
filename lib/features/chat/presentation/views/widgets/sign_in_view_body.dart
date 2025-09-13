@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_app/core/constants/app_styles.dart';
 import 'package:chat_app/core/constants/asset_images.dart';
 import 'package:chat_app/core/constants/validator.dart';
@@ -13,7 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignInViewBody extends StatefulWidget {
-  SignInViewBody({super.key});
+ const SignInViewBody({super.key});
 
   @override
   State<SignInViewBody> createState() => _SignInViewBodyState();
@@ -96,6 +98,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                         ChatView.routeName,
                         arguments: email,
                       );
+                      log(email!);
                     } on FirebaseAuthException catch (e) {
                       if (!context.mounted) return;
                       if (e.code == 'user-not-found') {

@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class RegisterViewBody extends StatefulWidget {
-  RegisterViewBody({super.key});
+ const RegisterViewBody({super.key});
 
   @override
   State<RegisterViewBody> createState() => _RegisterViewBodyState();
@@ -98,6 +98,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         ChatView.routeName,
                         arguments: email,
                       );
+                      log(email!);
                     } on FirebaseAuthException catch (e) {
                       if (!context.mounted) return;
                       if (e.code == 'weak-password') {
