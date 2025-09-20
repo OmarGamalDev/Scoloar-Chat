@@ -1,8 +1,10 @@
 import 'package:chat_app/core/constants/routes.dart';
+import 'package:chat_app/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_app/features/chat/presentation/views/sign_in_view.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,17 +19,22 @@ class ScoloarChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: onGenerateRoute,
-        initialRoute: SignInView.routeName,
-        theme: ThemeData(
-          textTheme: GoogleFonts.pacificoTextTheme(Theme.of(context).textTheme),
-          primaryTextTheme: GoogleFonts.pacificoTextTheme(
-            Theme.of(context).textTheme,
+    return BlocProvider(
+      create: (context) => ChatCubit(),
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: onGenerateRoute,
+          initialRoute: SignInView.routeName,
+          theme: ThemeData(
+            textTheme: GoogleFonts.pacificoTextTheme(
+              Theme.of(context).textTheme,
+            ),
+            primaryTextTheme: GoogleFonts.pacificoTextTheme(
+              Theme.of(context).textTheme,
+            ),
           ),
         ),
       ),

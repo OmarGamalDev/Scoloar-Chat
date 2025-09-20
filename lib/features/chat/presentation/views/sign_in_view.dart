@@ -12,7 +12,7 @@ class SignInView extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        SystemNavigator.pop(); 
+        SystemNavigator.pop();
       },
       child: Scaffold(
         backgroundColor: AppColors.primaryColor,
