@@ -16,3 +16,13 @@ class ChatRegisterFailure extends ChatState {
   final String errorMessage;
   ChatRegisterFailure({required this.errorMessage});
 }
+
+class SendMessageSuccess extends ChatState {}
+class SendMessageFailure extends ChatState {
+  final String errorMessage;
+  SendMessageFailure({required this.errorMessage});
+}
+class ChatSuccess extends ChatState {
+  List<MessageModel> messages = [];
+  ChatSuccess({required this.messages});
+}

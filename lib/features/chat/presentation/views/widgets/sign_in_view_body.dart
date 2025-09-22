@@ -27,6 +27,7 @@ class SignInViewBody extends StatelessWidget {
         } else if (state is ChatSigninSuccess) {
           isLoading = false;
           showsuccessmessage(context, message: "Sign in Successfully");
+          BlocProvider.of<ChatCubit>(context).getMessages();
           Navigator.pushReplacementNamed(
             context,
             ChatView.routeName,

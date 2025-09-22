@@ -28,7 +28,12 @@ class RegisterViewBody extends StatelessWidget {
         } else if (state is ChatRegiserSuccess) {
           isLoading = false;
           showsuccessmessage(context, message: "User Created Success");
-          Navigator.pushReplacementNamed(context, ChatView.routeName,arguments: email);
+          BlocProvider.of<ChatCubit>(context).getMessages();
+          Navigator.pushReplacementNamed(
+            context,
+            ChatView.routeName,
+            arguments: email,
+          );
         } else if (state is ChatRegisterFailure) {
           isLoading = false;
           showerrormessage(context, message: state.errorMessage);
