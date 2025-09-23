@@ -5,6 +5,7 @@ import 'package:chat_app/core/shared_widgets/custom_button.dart';
 import 'package:chat_app/core/shared_widgets/custom_text_form_field.dart';
 import 'package:chat_app/core/shared_widgets/show_error_message.dart';
 import 'package:chat_app/core/shared_widgets/show_success_message.dart';
+import 'package:chat_app/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_app/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class RegisterViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ChatCubit, ChatState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is ChatRegiserLoading) {
           isLoading = true;
@@ -68,16 +69,16 @@ class RegisterViewBody extends StatelessWidget {
                   CustomTextFormField(
                     Validator: Validator.validatePassword,
                     hintText: "Password",
-                    obscureText: context.read<ChatCubit>().isPasswordHidden,
+                    obscureText: context.read<AuthCubit>().isPasswordHidden,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        context.read<ChatCubit>().isPasswordHidden
+                        context.read<AuthCubit>().isPasswordHidden
                             ? Icons.visibility_off
                             : Icons.visibility,
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        context.read<ChatCubit>().togglePasswordVisibility();
+                        context.read<AuthCubit>().togglePasswordVisibility();
                       },
                     ),
                     onChanged: (data) {
@@ -90,7 +91,7 @@ class RegisterViewBody extends StatelessWidget {
                       text: "Sign up",
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<ChatCubit>(
+                          BlocProvider.of<AuthCubit>(
                             context,
                           ).createuser(email: email!, password: password!);
                         } else {}

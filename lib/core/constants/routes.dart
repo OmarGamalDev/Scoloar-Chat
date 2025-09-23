@@ -1,7 +1,6 @@
 import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
-import 'package:chat_app/features/chat/presentation/views/material_page_route_not_found.dart';
-import 'package:chat_app/features/chat/presentation/views/register_view.dart';
-import 'package:chat_app/features/chat/presentation/views/sign_in_view.dart';
+import 'package:chat_app/features/Auth/presentation/views/register_view.dart';
+import 'package:chat_app/features/Auth/presentation/views/sign_in_view.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -16,7 +15,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     default:
       return MaterialPageRoute(
-        builder: (_) => const MaterialPageRouteNotFound(),
+        builder: (_) => const SignInView(),
       );
   }
 }

@@ -38,9 +38,7 @@ class ChatView extends StatelessWidget {
           ),
           leading: const SizedBox(),
         ),
-        body: ChatViewBody(
-          email: email,
-        ),
+        body: ChatViewBody(email: email),
       ),
     );
   }

@@ -5,9 +5,10 @@ import 'package:chat_app/core/shared_widgets/custom_button.dart';
 import 'package:chat_app/core/shared_widgets/custom_text_form_field.dart';
 import 'package:chat_app/core/shared_widgets/show_error_message.dart';
 import 'package:chat_app/core/shared_widgets/show_success_message.dart';
+import 'package:chat_app/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_app/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_app/features/chat/presentation/views/chat_view.dart';
-import 'package:chat_app/features/chat/presentation/views/register_view.dart';
+import 'package:chat_app/features/Auth/presentation/views/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class SignInViewBody extends StatelessWidget {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ChatCubit, ChatState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is ChatSigninLoading) {
           isLoading = true;
@@ -69,16 +70,16 @@ class SignInViewBody extends StatelessWidget {
                   onChanged: (data) {
                     password = data;
                   },
-                  obscureText: context.read<ChatCubit>().isPasswordHidden,
+                  obscureText: context.read<AuthCubit>().isPasswordHidden,
                   suffixIcon: IconButton(
                     icon: Icon(
-                      context.read<ChatCubit>().isPasswordHidden
+                      context.read<AuthCubit>().isPasswordHidden
                           ? Icons.visibility_off
                           : Icons.visibility,
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      context.read<ChatCubit>().togglePasswordVisibility();
+                      context.read<AuthCubit>().togglePasswordVisibility();
                     },
                   ),
                 ),
@@ -87,7 +88,7 @@ class SignInViewBody extends StatelessWidget {
                   child: CustomButton(
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        BlocProvider.of<ChatCubit>(
+                        BlocProvider.of<AuthCubit>(
                           context,
                         ).signin(email: email!, password: password!);
                       } else {}
